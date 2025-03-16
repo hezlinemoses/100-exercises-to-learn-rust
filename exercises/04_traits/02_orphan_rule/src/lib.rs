@@ -4,8 +4,11 @@
 //  Look at the compiler error to get familiar with what it looks like.
 //  Then delete the code below and move on to the next exercise.
 
-impl PartialEq for u32 {
-    fn eq(&self, _other: &Self) -> bool {
-        todo!()
-    }
-}
+// orphan rules helps prevent same type having different implementation for a trait from multiple crates.
+// when we call 1.is_even(), it should only have one implementation to work with.
+
+// impl PartialEq for u32 {
+//     fn eq(&self, _other: &Self) -> bool {
+//         todo!()
+//     }
+// }

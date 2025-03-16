@@ -3,5 +3,10 @@ pub fn example() {
     // via `std::mem::size_of` will result in a compile-time error.
     //
     // TODO: Comment out the following line and move on to the next exercise.
-    std::mem::size_of::<str>();
+
+    // why is str's size not known in compile time tho?
+    // we know that str is a fat pointer, so it have 
+    // a pointer and the length, so its size is 16bytes..
+    
+    std::mem::size_of::<&str>();
 }

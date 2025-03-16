@@ -3,6 +3,26 @@
 //
 // Then implement the trait for `u32` and `i32`.
 
+/// This right here is called an extension trait...
+/// why? cuz its adding new methods to a foreign type
+/// u32 is from std, even tho we can use it here without
+/// "use" we can still use it. ITS A FORIGN TYPE KKKK! MOVE ON!!
+pub trait IsEven {
+    fn is_even(self)->bool;
+}
+
+impl IsEven for u32 {
+    fn is_even(self)->bool {
+        self % 2 == 0
+    }
+}
+
+impl IsEven for i32 {
+    fn is_even(self)->bool {
+        self % 2 == 0
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
