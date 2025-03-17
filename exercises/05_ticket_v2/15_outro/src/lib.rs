@@ -12,7 +12,7 @@ pub use description::TicketDescription;
 pub use status::Status;
 pub use title::TicketTitle;
 
-#[derive(Debug, PartialEq, Clone)]
+#[derive(Debug, PartialEq)]
 // We no longer need to make the fields private!
 // Since each field encapsulates its own validation logic, there is no risk of
 // a user of `Ticket` modifying the fields in a way that would break the

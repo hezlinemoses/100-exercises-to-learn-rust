@@ -23,6 +23,20 @@ pub enum TicketNewError {
     DescriptionCannotBeEmpty,
     #[error("Description cannot be longer than 500 bytes")]
     DescriptionTooLong,
+    //display is implemented for ParseStatusError, so we can directly use that here
+    #[error("{source}")] 
+    InvalidStatus{
+        //this will be considered as the source error...
+        //if renamed it should have #[source] derived for the field
+        source: status::ParseStatusError, 
+    }
+}
+
+// to make ? work
+impl From<status::ParseStatusError> for TicketNewError {
+    fn from(value: status::ParseStatusError) -> Self {
+        Self::InvalidStatus { source: value }
+    }
 }
 
 #[derive(Debug, PartialEq, Clone)]
@@ -48,7 +62,8 @@ impl Ticket {
         }
 
         // TODO: Parse the status string into a `Status` enum.
-
+        // ? will only work if we have an implementation of from ParseStatus error to TicketNewError
+        let status: Status = status.try_into()?;
         Ok(Ticket {
             title,
             description,
