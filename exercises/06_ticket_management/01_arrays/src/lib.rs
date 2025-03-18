@@ -1,7 +1,7 @@
 // TODO: Flesh out the `WeekTemperatures` struct and its method implementations to pass the tests.
 
 pub struct WeekTemperatures {
-    // TODO
+    store: [(Weekday, Option<i32>); 7],
 }
 
 pub enum Weekday {
@@ -16,15 +16,42 @@ pub enum Weekday {
 
 impl WeekTemperatures {
     pub fn new() -> Self {
-        todo!()
+        Self {
+            store: [
+                (Weekday::Monday, None),
+                (Weekday::Tuesday, None),
+                (Weekday::Wednesday, None),
+                (Weekday::Thursday, None),
+                (Weekday::Friday, None),
+                (Weekday::Saturday, None),
+                (Weekday::Sunday, None),
+            ],
+        }
     }
 
     pub fn get_temperature(&self, day: Weekday) -> Option<i32> {
-        todo!()
+        match day {
+            Weekday::Monday => self.store.get(0).and_then(|inner| inner.1),
+            Weekday::Tuesday => self.store.get(1).and_then(|inner| inner.1),
+            Weekday::Wednesday => self.store.get(2).and_then(|inner| inner.1),
+            Weekday::Thursday => self.store.get(3).and_then(|inner| inner.1),
+            Weekday::Friday => self.store.get(4).and_then(|inner| inner.1),
+            Weekday::Saturday => self.store.get(5).and_then(|inner| inner.1),
+            Weekday::Sunday => self.store.get(6).and_then(|inner| inner.1),
+        }
     }
 
     pub fn set_temperature(&mut self, day: Weekday, temperature: i32) {
-        todo!()
+        let val = (day,Some(temperature));
+        match val.0 {
+            Weekday::Monday => self.store[0] = val,
+            Weekday::Tuesday => self.store[1] = val,
+            Weekday::Wednesday => self.store[2] = val,
+            Weekday::Thursday => self.store[3] = val,
+            Weekday::Friday => self.store[4] = val,
+            Weekday::Saturday => self.store[5] = val,
+            Weekday::Sunday => self.store[6] = val,
+        }
     }
 }
 

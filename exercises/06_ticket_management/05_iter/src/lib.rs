@@ -1,3 +1,4 @@
+use std::slice::Iter;
 use ticket_fields::{TicketDescription, TicketTitle};
 
 // TODO: Provide an `iter` method that returns an iterator over `&Ticket` items.
@@ -8,6 +9,20 @@ use ticket_fields::{TicketDescription, TicketTitle};
 #[derive(Clone)]
 pub struct TicketStore {
     tickets: Vec<Ticket>,
+}
+
+impl<'a> IntoIterator for &'a TicketStore {
+    type Item = &'a Ticket;
+    type IntoIter = Iter<'a,Ticket>;
+    fn into_iter(self) -> Self::IntoIter {
+        self.tickets.iter()
+    }
+}
+
+impl TicketStore {
+    pub fn iter<'a>(&'a self) -> Iter<'a, Ticket>{
+        self.into_iter()
+    }
 }
 
 #[derive(Debug, Clone, PartialEq)]
