@@ -15,7 +15,8 @@ fn a_thread_is_spawned() {
             title: ticket_title(),
             description: ticket_description(),
         }))
-        // If the thread is no longer running, this will panic
+        // If the thread is no longer running, this will panic(thread here means the thread that is running the consumer part?
+        // if that is not running we get an error)
         // because the channel will be closed.
         .expect("Did you actually spawn a thread? The channel is closed!");
 }
@@ -26,7 +27,7 @@ fn ready() {
     // since our server doesn't expose any **read** actions.
     // We have no way to know if the inserts are actually happening and if they
     // are happening correctly.
-    let move_forward = false;
+    let move_forward = true;
 
     assert!(move_forward);
 }

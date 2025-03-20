@@ -6,18 +6,24 @@ use std::rc::Rc;
 
 pub struct DropTracker<T> {
     value: T,
-    counter: todo!(),
+    counter: Rc<RefCell<usize>>,
 }
 
 impl<T> DropTracker<T> {
-    pub fn new(value: T, counter: todo!()) -> Self {
+    pub fn new(value: T, counter: Rc<RefCell<usize>>) -> Self {
         Self { value, counter }
     }
 }
 
 impl<T> Drop for DropTracker<T> {
     fn drop(&mut self) {
-        todo!()
+        // let mut mutable_borrow = counter.borrow_mut();
+        // *mutable_borrow+=1;
+        // drop(mutable_borrow);
+        // we can just dereference it without assigning to a variable
+        // the lifetime of this mutable borrow is contained within
+        // the next single line
+        *self.counter.borrow_mut()+=1;
     }
 }
 
