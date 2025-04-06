@@ -3,6 +3,7 @@
 //  which allows the caller to both modify and read the ticket.
 use std::sync::mpsc::{sync_channel, Receiver, SyncSender, TrySendError};
 use std::sync::{Arc, Mutex};
+use std::thread::spawn;
 
 use crate::data::{Ticket, TicketDraft};
 use crate::store::{TicketId, TicketStore};
@@ -76,7 +77,7 @@ pub fn server(receiver: Receiver<Command>) {
                 response_channel,
             }) => {
                 let ticket = store.get(id);
-                let _ = response_channel.send(ticket);
+                let _ = response_channel.send(ticket.cloned());
             }
             Err(_) => {
                 // There are no more senders, so we can safely break

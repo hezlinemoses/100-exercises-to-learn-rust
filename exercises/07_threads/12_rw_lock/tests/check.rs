@@ -20,7 +20,7 @@ fn works() {
         assert_eq!(ticket.title, draft.title);
         assert_eq!(ticket.description, draft.description);
     }
-
+    // hehehe if you comment this it will deadlock
     drop(lock1);
 
     let ticket = client.get(ticket_id).unwrap().unwrap();
